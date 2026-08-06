@@ -17,20 +17,25 @@ def cargar_datos(ruta: Path = RUTA_DATOS) -> pd.DataFrame:
     )
 
 # resumen de ventas por dia de la semana
-resumen = pd.DataFrame()
-for dia in df["dia_semana"].unique():
-    sub = df[df["dia_semana"] == dia]
-    resumen = resumen.append(
-        {"dia": dia, "ventas_promedio": sub["ventas_unidades"].mean()},
-        ignore_index=True,
-    )
-print("--- resumen por dia ---")
-print(resumen)
+def resumen_por_dia(df):
+    resumen = pd.DataFrame()
+    for dia in df["dia_semana"].unique():
+        sub = df[df["dia_semana"] == dia]
+        resumen = resumen.append(
+            {"dia": dia, "ventas_promedio": sub["ventas_unidades"].mean()},
+            ignore_index=True,
+        )
+    print("--- resumen por dia ---")
+    print(resumen)
+    return resumen
 
 # variable: es fin de semana?
-df["es_finde"] = 0
-for i in range(len(df)):
-    if df["dia_semana"][i] == "sábado" or df["dia_semana"][i] == "domingo":
-        df["es_finde"][i] = 1
+def marcar_finde(df):
+    df["es_finde"] = df["dia_semana"].isin(["sábado", "domingo"]).astype(int)
+    return df
 
+# imprimir resumen de ventas por dia de la semana
+if __name__ == "__main__":
+    df = cargar_datos()
+    resumen_por_dia(df)
 
