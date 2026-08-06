@@ -1,10 +1,13 @@
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error 
-
+from datos import cargar_datos, marcar_finde,reemplazar_datos_faltantes
 
 def entrenar_modelo():
- 
+    df=cargar_datos()
+    reemplazar_datos_faltantes(df)
+    marcar_finde(df)
+    
     # entrenar el modelo
     X = df[["temperatura_c", "precio_promedio", "es_finde"]]
     y = df["ventas_unidades"]
