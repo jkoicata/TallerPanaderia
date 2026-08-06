@@ -24,22 +24,9 @@ TallerPanaderia/
 └── README.md
 
 ```
-
 ## Decisiones
-
-```
-```
-
 ## Datos Faltantes
-
-```
-
 Se hizo analisis de datos faltantes evidenciando que en % de datos faltantes de la columna temperatura representaba más de un
 10% de los datos totales, porcentaje que consideramos elevado para eliminar los registros, por lo anterior, se decidió hacer un promedio de los datos de temperatura y rellenar los datos faltantes con el mismo.
-
-```
-
 ## Marcación Fin de Semana
-
-```
 df["es_finde"][i] = 1 crea un chained assignment que puede hacer que los datos no se actualicen correctamente en el dataframe original que cargamos (datos panaderia), por eso modificamos esta línea de código usando el método .isin está alineada directamente con el index del dataframe sin necesidad de dos operaciones de indexación diferentes
