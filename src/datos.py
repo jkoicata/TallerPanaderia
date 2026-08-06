@@ -16,6 +16,11 @@ def cargar_datos(ruta: Path = RUTA_DATOS) -> pd.DataFrame:
         na_values=["SIN DATO"],
     )
 
+    columnas_esperadas = {"fecha","dia_semana","temperatura_c","precio_promedio","ventas_unidades"}
+    faltantes = columnas_esperadas - set(df.columns)
+    if faltantes:
+        raise ValueError(f"Faltan columnas en el CSV: {faltantes}")
+
     print(df.dtypes)
     return df
 
