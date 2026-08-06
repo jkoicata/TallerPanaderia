@@ -1,11 +1,20 @@
 # analisis panaderia - version final FINAL (esta si funciona)
 # hecho por el practicante, no tocar
 import pandas as pd
+from pathlib import Path
 
 
-print("cargando datos...")
-df = pd.read_csv("C:\\Users\\practicante\\Desktop\\proyecto_panaderia\\datos_panaderia.csv")
-print("datos cargados:", len(df), "filas")
+# Ruta relativa a la raíz del proyecto — funciona en cualquier máquina.
+RUTA_DATOS = Path(__file__).parent.parent / "data" / "datos_panaderia.csv"
+
+def cargar_datos(ruta: Path = RUTA_DATOS) -> pd.DataFrame:
+    """Carga el CSV de ventas y valida los datos."""
+    df = pd.read_csv(
+        ruta,
+        sep=";",
+        encoding="latin1",
+        na_values=["SIN DATO"],
+    )
 
 # resumen de ventas por dia de la semana
 resumen = pd.DataFrame()
