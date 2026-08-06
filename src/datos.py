@@ -16,6 +16,9 @@ def cargar_datos(ruta: Path = RUTA_DATOS) -> pd.DataFrame:
         na_values=["SIN DATO"],
     )
 
+    print(df.dtypes)
+    return df
+
 # resumen de ventas por dia de la semana
 def resumen_por_dia(df):
     resumen = pd.DataFrame()
@@ -39,3 +42,7 @@ if __name__ == "__main__":
     df = cargar_datos()
     resumen_por_dia(df)
 
+#datos faltantes en temperatura_por promedio, se puede reemplazar por la media de temperatura de los dias que si tienen datos.
+def reemplazar_datos_faltantes(df):
+    df["temperatura_c"] = df["temperatura_c"].fillna(df["temperatura_c"].mean())
+    return df
